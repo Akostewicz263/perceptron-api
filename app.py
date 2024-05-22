@@ -4,7 +4,6 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Załaduj model
 model = joblib.load("model.pkl")
 
 @app.route('/')
@@ -28,10 +27,8 @@ def predict():
     x1 = request.args.get("x1", 0, type=float)
     x2 = request.args.get("x2", 0, type=float)
 
-    # Przewiduj klasę
     prediction = model.predict(np.array([[x1, x2]]))
 
-    # Zmień typ int32 na int
     prediction = int(prediction[0])
 
     features = {
